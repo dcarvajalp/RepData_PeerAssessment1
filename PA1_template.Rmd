@@ -13,7 +13,7 @@ We then set the working directory and call the necessary packages
 
 
 ```{r}
-setwd("C:/Users/Teardrop/Documents/R")
+setwd("C:/Users/Teardrop/Documents/GitHub/RepData_PeerAssessment1")
 library(plyr)
 library(ggplot2)
 ```
@@ -28,7 +28,7 @@ RawData <- read.csv("activity.csv", header = TRUE, sep = ",", as.is = TRUE)
 head(RawData)
 ```
 
-Then, the format of the date is stablished
+Then, the format of the date is established
  
 ```{r} 
 RawData$date <- strptime(RawData$date,  "%Y-%m-%d")
@@ -104,7 +104,7 @@ And to replace the missing values with the mean steps by interval:
  
  a. We first match the intervals with missing data with the intervals of the summary to obtain the index of the mean steps by interval
  
- a. We then use the index to acces the mean steps by interval from the summary and we use it to replace the missing values
+ a. We then use the index to access the mean steps by interval from the summary and we use it to replace the missing values
  
  
 
@@ -147,7 +147,7 @@ p
 
 ###  Corrected Mean and median total number of steps taken per day
 
-Imputing missing values with mean steps taken per interval does not seem to cause a hugue diference on the calculations of the mean and median steps taken per day:
+Imputing missing values with mean steps taken per interval does not seem to cause a huge difference on the calculations of the mean and median steps taken per day:
 
 
 ```{r, echo=TRUE} 
@@ -172,13 +172,13 @@ print(MedSteps2)
 
 # Are there differences in activity patterns between weekdays and weekends?
 
-First, on the dataset with the filled-in missing values we create a new column containing the day on which the obervation has been taken
+First, on the data set with the filled-in missing values we create a new column containing the day on which the observation has been taken
 
 ```{r, echo=TRUE} 
 TidyData$Day <- weekdays(TidyData$date)
 ```
 
-Then we define saturday and friday as weekend days, 
+Then we define Saturday and Friday as weekend days, 
 
 ```{r, echo=TRUE} 
 TidyData$DayF <-apply(as.array(TidyData$Day), 1, function(x) ifelse(x == "samedi" | x == "dimanche", "weekend", "weekday"))
@@ -191,7 +191,7 @@ TidyData$DayF <- as.factor(TidyData$DayF)
 ```
 
 
-We then procede to evaluate the mean steps taken by the time interval for each factor (*weekday* or *weekend*)
+We then proceed to evaluate the mean steps taken by the time interval for each factor (*weekday* or *weekend*)
 
 ```{r, echo=TRUE} 
 SummaryStepsInt2 <- ddply(TidyData, .(interval, DayF), summarise, 
